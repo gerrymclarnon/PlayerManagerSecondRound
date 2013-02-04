@@ -13,6 +13,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <inherited>true</inherited>
+                <version>3.0</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -44,40 +45,176 @@
             </plugin>
         </plugins>
     </build>
+<!--
+    <repositories>
+        <repository>
+            <id>eclipse</id>
+            <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
+        </repository>
+    </repositories>
+-->
+
+    <properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--
+                <eclipselink.version>2.4.1</eclipselink.version>
+-->
+        <jersey.version>1.16</jersey.version>
+        <spring.version>3.1.0.RELEASE</spring.version>
+        <hibernate.version>3.3.1.ga</hibernate.version>
+        <glassfish.version>3.1.1</glassfish.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+    </properties>
+    
     <dependencies>
+        
+        <!-- Jersey -->
         <dependency>
             <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-servlet</artifactId>
+            <artifactId>jersey-server</artifactId>
             <version>${jersey.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-json</artifactId>
             <version>${jersey.version}</version>
         </dependency>
+
+        <!-- Spring -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+        </dependency>
+        
+        <!-- AOP dependency -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+    
+        <!-- Jersey + Spring -->
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-spring</artifactId>
             <version>${jersey.version}</version>
-            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+            </exclusions>
+            <type>jar</type>
         </dependency>
+   
+        <!-- Hibernate, EnityManager & DB -->
+        <dependency>
+           <groupId>org.hibernate</groupId>
+           <artifactId>hibernate-entitymanager</artifactId>
+           <version>4.1.9.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.8.1.2</version>
+        </dependency>
+<!--
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.21</version>
+        </dependency>
+-->                        
+
+        <!-- GlassFsh -->
         <dependency>
             <groupId>org.glassfish.extras</groupId>
             <artifactId>glassfish-embedded-web</artifactId>
             <version>${glassfish.version}</version>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
+            <type>jar</type>
+        </dependency>
+        
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey.version}</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
-    <properties>
-        <jersey.version>1.16</jersey.version>
-        <glassfish.version>3.1.1</glassfish.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
-    </properties>
 </project>
