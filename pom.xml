@@ -5,7 +5,7 @@
     <artifactId>TeamPlayerV4</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>TeamPlayerV4 Jersey Webapp</name>
+    <name>TeamPlayerV4</name>
     <build>
         <finalName>TeamPlayerV4</finalName>
         <plugins>
