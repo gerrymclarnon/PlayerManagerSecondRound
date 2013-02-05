@@ -1,14 +1,14 @@
 
-package net.playermanager.teamplayerv4;
+package net.playermanager.service;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-/** Example resource class hosted at the URI path "/myresource"
+/** Example resource class hosted at the URI path "/hello"
  */
-@Path("/myresource")
-public class MyResource {
+@Path("/hello")
+public class HelloService {
     
     /** Method processing HTTP GET requests, producing "text/plain" MIME media
      * type.
@@ -16,7 +16,7 @@ public class MyResource {
      */
     @GET 
     @Produces("text/plain")
-    public String getIt() {
+    public String helloWorld() {
         return "Hi there!";
     }
 }

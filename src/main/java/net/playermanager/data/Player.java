@@ -2,19 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package net.playermanager.data;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,28 +24,45 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  */
 @Entity
 @XmlRootElement
-public class Team implements Serializable {
+public class Player implements Serializable {
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(unique = true)
     @Basic(optional = false)
     @NotNull    
     @Size(min = 1, max = 45)
     private String uri;
-
+    
     @Column
     @Basic(optional = false)
     @NotNull    
     @Size(min = 1, max = 45)
     private String name;
-    
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Player> players;
 
+    @ManyToOne
+    private Team team;
+
+    @XmlTransient
+    @JsonIgnore
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -64,24 +78,9 @@ public class Team implements Serializable {
     public void setUri(String uri) {
         this.uri = uri;
     }
-    
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public Collection<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(Collection<Player> players) {
-        this.players = players;
-    }
-
-    @Override
+@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -91,10 +90,10 @@ public class Team implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Team)) {
+        if (!(object instanceof Player)) {
             return false;
         }
-        Team other = (Team) object;
+        Player other = (Player) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,7 +102,7 @@ public class Team implements Serializable {
 
     @Override
     public String toString() {
-        return "Team{" + "id=" + id + ", uri=" + uri + ", name=" + name + '}';
+        return "Player{" + "id=" + id + ", uri=" + uri + ", name=" + name + '}';
     }
 
 }

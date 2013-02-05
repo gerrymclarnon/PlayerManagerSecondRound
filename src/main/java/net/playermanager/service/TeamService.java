@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package net.playermanager.service;
 
 import com.sun.jersey.api.spring.Autowire;
 import com.sun.jersey.spi.resource.Singleton;
-import entities.Player;
+import net.playermanager.data.Player;
 import javax.persistence.EntityManager;
-import entities.Team;
+import net.playermanager.data.Team;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
@@ -33,11 +33,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Path("/team")
 @Singleton
 @Autowire
-public class TeamRESTFacade {
+public class TeamService {
     @PersistenceContext(unitName = "TeamPlayerPU")
     protected EntityManager entityManager;
 
-    public TeamRESTFacade() {
+    public TeamService() {
     }
 
     @POST

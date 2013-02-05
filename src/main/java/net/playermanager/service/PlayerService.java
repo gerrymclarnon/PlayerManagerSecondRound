@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package net.playermanager.service;
 
 import com.sun.jersey.api.spring.Autowire;
 import com.sun.jersey.spi.resource.Singleton;
 import javax.persistence.EntityManager;
-import entities.Player;
-import entities.Team;
+import net.playermanager.data.Player;
+import net.playermanager.data.Team;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.Query;
@@ -27,11 +27,11 @@ import javax.ws.rs.PathParam;
 @Path("/{clubId}{teamId:(/[^/]+?)?}/{players}")
 @Singleton
 @Autowire
-public class PlayerRESTFacade {
+public class PlayerService {
     @PersistenceContext(unitName = "TeamPlayerPU")
     protected EntityManager entityManager;
 
-    public PlayerRESTFacade() {
+    public PlayerService() {
     }
 
     @GET
