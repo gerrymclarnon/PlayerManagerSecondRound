@@ -64,7 +64,10 @@
         <hibernate.version>3.3.1.ga</hibernate.version>
         <glassfish.version>3.1.1</glassfish.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+-->
+        <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
     </properties>
     
     <dependencies>
@@ -175,17 +178,43 @@
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
-            <version>10.8.1.2</version>
+            <version>10.8.2.2</version>
         </dependency>
+
+      <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyclient</artifactId>
+            <version>10.8.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbynet</artifactId>
+            <version>10.8.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbytools</artifactId>
+            <version>10.8.2.2</version>
+        </dependency>
+                
 <!--
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.21</version>
         </dependency>
--->                        
-
-        <!-- GlassFsh -->
+-->                     
+        <!-- TomEE -->
+        <!--
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>1.2_15</version>
+        </dependency>
+         -->
+        <!-- GlassFish -->
         <dependency>
             <groupId>org.glassfish.extras</groupId>
             <artifactId>glassfish-embedded-web</artifactId>
