@@ -73,6 +73,7 @@ public class Team implements Serializable {
         this.name = name;
     }
 
+    @XmlTransient
     public Collection<Player> getPlayers() {
         return players;
     }

@@ -17,6 +17,6 @@ public class HelloService {
     @GET 
     @Produces("text/plain")
     public String helloWorld() {
-        return "Hi there!";
+        return "Hello World!";
     }
 }
