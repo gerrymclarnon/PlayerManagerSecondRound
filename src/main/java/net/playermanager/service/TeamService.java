@@ -4,14 +4,23 @@
  */
 package net.playermanager.service;
 
+import net.playermanager.util.UserAccount;
 import com.sun.jersey.api.spring.Autowire;
 import com.sun.jersey.spi.resource.Singleton;
+import java.io.UnsupportedEncodingException;
 import net.playermanager.data.Player;
 import javax.persistence.EntityManager;
 import net.playermanager.data.Team;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.Query;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -37,6 +46,9 @@ public class TeamService {
     @PersistenceContext(unitName = "TeamPlayerPU")
     protected EntityManager entityManager;
 
+    @Resource(name = "mail/playermanager")
+    private Session mailSession;
+    
     public TeamService() {
     }
 
@@ -89,6 +101,22 @@ public class TeamService {
         return find(true, -1, -1);
     }
 
+    protected void sendMessage(UserAccount userAccount) {
+        Message msg = new MimeMessage(mailSession);
+        try {
+            msg.setSubject("[app] Email Alert");
+            msg.setRecipient(Message.RecipientType.TO,
+                    new InternetAddress(userAccount.getEmail(),
+                    userAccount.toString()));
+            msg.setText("Hello " + userAccount.getName());
+            Transport.send(msg);
+        } catch (MessagingException me) {
+            // manage exception
+        } catch (UnsupportedEncodingException uee) {
+            // manage exception
+        }
+    }    
+    
     @GET
     @Path("{max}/{first}")
     @Produces({"application/xml", "application/json"})

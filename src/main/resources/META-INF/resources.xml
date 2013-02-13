@@ -12,6 +12,13 @@
     
     <jdbc-resource enabled="true" pool-name="SamplePool" jndi-name="jdbc/sample"  object-type="user"/>
     
+    <mail-resource jndi-name="mail/playermanager"
+                    host="www.example.com"
+                    user="gerry"
+                    from="gerry@example.com">
+        <property name="mail-password" value="adminadmin"/>
+    </mail-resource>
+        
 </resources>
 
 <!-- TomEE 1.5.1 Derby resources -->    
