@@ -8,13 +8,13 @@ package net.playermanager.util;
  *
  * @author u530619
  */
-class UserAccount {
+public class UserAccount {
 
-    String getName() {
+    public String getName() {
         return "gerry";
     }
 
-    String getEmail() {
+    public String getEmail() {
         return "gerry@mclarnonworld.com";
     }
     

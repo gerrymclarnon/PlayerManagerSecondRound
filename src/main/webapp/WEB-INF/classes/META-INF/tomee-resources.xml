@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+TomEE 1.5 Resource definition file used to configure application specific resources.
+Location: <webapp>/WEB-INF/classes/META-INF/resources.xml 
+-->
+<resources>
+    <Resource id="jdbc/sample" type="DataSource">
+        JdbcDriver org.apache.derby.jdbc.ClientDriver    
+        JdbcUrl jdbc:derby://localhost:1527/sample    
+        UserName app    
+        Password app    
+        JtaManaged true    
+    </Resource>
+    
+    <!-- TomEE 1.5.1 MySQL resources -->
+    <!--
+    <Resource id="sample" type="javax.sql.DataSource">
+      JdbcDriver = com.mysql.Driver
+      JdbcUrl = jdbc:mysql://localhost:3306/sample
+      UserName = root
+      Password = 
+      JtaManaged = true
+    </Resource>
+    -->
+
+</resources>

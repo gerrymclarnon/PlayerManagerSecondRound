@@ -79,10 +79,10 @@
         <hibernate.version>3.3.1.ga</hibernate.version>
         <glassfish.version>3.1.1</glassfish.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
 <!--
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
 -->
+        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
     </properties>
     
     <dependencies>

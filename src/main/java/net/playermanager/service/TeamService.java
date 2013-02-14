@@ -32,6 +32,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +47,7 @@ public class TeamService {
     @PersistenceContext(unitName = "TeamPlayerPU")
     protected EntityManager entityManager;
 
-    @Resource(name = "mail/playermanager")
+    @Resource(name = "java:app/mail/playermanager")
     private Session mailSession;
     
     public TeamService() {
@@ -98,22 +99,22 @@ public class TeamService {
     @Produces({"application/xml", "application/json"})
     @Transactional
     public List<Team> findAll() {
+        sendMessage(new UserAccount());
         return find(true, -1, -1);
     }
 
     protected void sendMessage(UserAccount userAccount) {
         Message msg = new MimeMessage(mailSession);
         try {
-            msg.setSubject("[app] Email Alert");
+            msg.setSubject("[playermanager] Email Alert");
             msg.setRecipient(Message.RecipientType.TO,
-                    new InternetAddress(userAccount.getEmail(),
-                    userAccount.toString()));
+                    new InternetAddress(userAccount.getEmail(), userAccount.getName()));
             msg.setText("Hello " + userAccount.getName());
             Transport.send(msg);
         } catch (MessagingException me) {
-            // manage exception
+            me.printStackTrace();
         } catch (UnsupportedEncodingException uee) {
-            // manage exception
+            uee.printStackTrace();
         }
     }    
     
